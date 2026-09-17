@@ -1,0 +1,19 @@
+Duplicate
+    ↓
+Cycle
+    ↓
+Meet
+    ↓
+Reset
+    ↓
+Entrance
+
+"Duplicate creates a cycle; slow and fast meet inside it;
+reset one pointer; where they meet again is the duplicate."
+
+"I treat the array like a linked list, where nums[index] tells me the next position.
+Because one number is repeated, a cycle is created.
+I use two pointers: slow moves one step and fast moves two steps.
+First, they meet inside the cycle.
+Then I move slow back to the starting point and move both pointers one step at a time.
+Where they meet again is the duplicate number."

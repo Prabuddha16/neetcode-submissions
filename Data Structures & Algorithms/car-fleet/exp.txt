@@ -1,0 +1,63 @@
+The key observation is that cars are moving toward the same target
+and a faster car cannot overtake a slower car.
+So if a car behind reaches the target in less time than
+or equal to the car or fleet ahead, it will eventually catch that fleet
+and become part of the same fleet.
+
+I sort the cars by position in descending order
+so I process them from the car closest to the target to the farthest.
+For each car, I calculate its independent arrival time as (target - position) / speed.
+If a car behind has an arrival time less than or equal to the fleet ahead,
+it will catch that fleet because cars cannot overtake. Otherwise, it forms a new fleet.
+Therefore, every time the current arrival time is greater than the previous fleet's arrival time,
+I increment the fleet count.
+
+             TARGET
+                🚩
+                |
+        🚗  →   |  time = 2
+        🚗  →   |  time = 1
+                |
+        🚗  →   |  time = 4
+                |
+        🚗  →   |  time = 3
+                |
+        🚗  →   |  time = 6
+
+
+1 catches 2
+3 catches 4
+
+Fleets:
+[2,1]   [4,3]   [6]
+
+Answer = 3
+
+🧠 LONG-TERM MEMORY TRICK
+
+Remember this 5-word formula:
+
+SORT → TIME → FRONT → CATCH → COUNT
+SORT
+
+Sort cars by position:
+
+closest → farthest
+TIME
+
+Calculate:
+
+(target - position) / speed
+FRONT
+
+Compare with the fleet in front.
+
+CATCH
+currentTime <= frontTime
+
+→ catches → same fleet.
+
+COUNT
+currentTime > frontTime
+
+→ cannot catch → new fleet.

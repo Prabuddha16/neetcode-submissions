@@ -10,54 +10,54 @@
  */
 
 class Solution {
-    /**
-     * @param {TreeNode} root
-     * @return {number}
-     */
-    diameterOfBinaryTree(root) {
-        // return this.brute(root);
-        return this.optimal(root);
-    }
+  /**
+   * @param {TreeNode} root
+   * @return {number}
+   */
+  diameterOfBinaryTree(root) {
+    // return this.brute(root);
+    return this.optimal(root);
+  }
 
-    optimal(root) {
-        let maxDiameter = 0;
+  optimal(root) {
+    let maxDiameter = 0;
 
-        const recursion = (root) => {
-            if (!root) return 0;
+    const recursion = (root) => {
+      if (!root) return 0;
 
-            // Height of SubTree
-            let lHeight = recursion(root.left);
-            let rHeight = recursion(root.right);
+      // Height of SubTree
+      let lHeight = recursion(root.left);
+      let rHeight = recursion(root.right);
 
-            // Get Diameter
-            maxDiameter = Math.max(maxDiameter, lHeight + rHeight);
+      // Get Diameter
+      maxDiameter = Math.max(maxDiameter, lHeight + rHeight);
 
-            // Height of Current SubTree
-            return 1 + Math.max(lHeight, rHeight);
-        };
+      // Height of Current SubTree
+      return 1 + Math.max(lHeight, rHeight);
+    };
 
-        recursion(root);
+    recursion(root);
 
-        return maxDiameter;
-    }
+    return maxDiameter;
+  }
 
-    brute(root) {
-        if (!root) return 0;
+  brute(root) {
+    if (!root) return 0;
 
-        // Get Height of Tree
-        const lHeight = this.height(root.left);
-        const rHeight = this.height(root.right);
+    // Get Height of Tree
+    const lHeight = this.height(root.left);
+    const rHeight = this.height(root.right);
 
-        // get Diameter of Tree
-        const lDiameter = this.brute(root.left);
-        const rDiameter = this.brute(root.right);
+    // get Diameter of Tree
+    const lDiameter = this.brute(root.left);
+    const rDiameter = this.brute(root.right);
 
-        return Math.max(lHeight + rHeight, lDiameter, rDiameter);
-    }
+    return Math.max(lHeight + rHeight, lDiameter, rDiameter);
+  }
 
-    height(root) {
-        if (!root) return 0;
+  height(root) {
+    if (!root) return 0;
 
-        return 1 + Math.max(this.height(root.left), this.height(root.right));
-    }
+    return 1 + Math.max(this.height(root.left), this.height(root.right));
+  }
 }

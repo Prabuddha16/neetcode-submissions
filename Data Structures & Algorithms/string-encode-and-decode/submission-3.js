@@ -1,43 +1,43 @@
 class Solution {
-    /**
-     * @param {string[]} strs
-     * @returns {string}
-     */
-    encode(strs) {
-        let result = "";
+  /**
+   * @param {string[]} strs
+   * @returns {string}
+   */
+  encode(strs) {
+    let result = "";
 
-        for (let str of strs) {
-            result += str.length + "#" + str;
-        }
-
-        return result;
+    for (let str of strs) {
+      result += str.length + "#" + str;
     }
 
-    /**
-     * @param {string} str
-     * @returns {string[]}
-     */
-    decode(s) {
-        const result = [];
-        let i = 0;
+    return result;
+  }
 
-        // Iterate throght string
-        while (i < s.length) {
-            let j = i;
+  /**
+   * @param {string} str
+   * @returns {string[]}
+   */
+  decode(s) {
+    const result = [];
+    let i = 0;
 
-            while (s[j] !== "#") {
-                j++;
-            }
+    // Iterate throght string
+    while (i < s.length) {
+      let j = i;
 
-            const length = Number(s.slice(i, j)); // To get number(length) of a string
+      while (s[j] !== "#") {
+        j++;
+      }
 
-            const str = s.slice(j + 1, j + 1 + length);
+      const length = Number(s.slice(i, j)); // To get number(length) of a string
 
-            result.push(str);
+      const str = s.slice(j + 1, j + 1 + length);
 
-            i = j + 1 + length;
-        }
+      result.push(str);
 
-        return result;
+      i = j + 1 + length;
     }
+
+    return result;
+  }
 }

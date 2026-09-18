@@ -10,23 +10,26 @@
  */
 
 class Solution {
-    /**
-     * @param {TreeNode} root
-     * @return {boolean}
-     */
-    isValidBST(root) {
-        return this.validate(root, -Infinity, Infinity);
+  /**
+   * @param {TreeNode} root
+   * @return {boolean}
+   */
+  isValidBST(root) {
+    return this.validate(root, -Infinity, Infinity);
+  }
+
+  validate(node, left, right) {
+    if (node === null) {
+      return true;
     }
 
-    validate(node, left, right) {
-        if (node === null) {
-            return true;
-        }
-
-        if (node.val <= left || node.val >= right) {
-            return false;
-        }
-
-        return this.validate(node.left, left, node.val) && this.validate(node.right, node.val, right);
+    if (node.val <= left || node.val >= right) {
+      return false;
     }
+
+    return (
+      this.validate(node.left, left, node.val) &&
+      this.validate(node.right, node.val, right)
+    );
+  }
 }

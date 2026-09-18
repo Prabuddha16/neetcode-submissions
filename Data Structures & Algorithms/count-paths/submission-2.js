@@ -1,77 +1,77 @@
 class Solution {
-    /**
-     * @param {number} m
-     * @param {number} n
-     * @return {number}
-     */
-    uniquePaths(m, n) {
-        // return this.brute(m, n);
-        // return this.memoDP(m, n);
-        return this.optimal(m, n);
+  /**
+   * @param {number} m
+   * @param {number} n
+   * @return {number}
+   */
+  uniquePaths(m, n) {
+    // return this.brute(m, n);
+    // return this.memoDP(m, n);
+    return this.optimal(m, n);
+  }
+
+  optimal(m, n) {
+    // Create 2D paths
+    const dp = Array.from({ length: m }, () => new Array(n).fill(1));
+
+    for (let i = 1; i < m; i++) {
+      for (let j = 1; j < n; j++) {
+        dp[i][j] = dp[i - 1][j] + dp[i][j - 1];
+      }
     }
 
-    optimal(m, n) {
-        // Create 2D paths
-        const dp = Array.from({ length: m }, () => new Array(n).fill(1));
+    return dp[m - 1][n - 1];
+  }
 
-        for (let i = 1; i < m; i++) {
-            for (let j = 1; j < n; j++) {
-                dp[i][j] = dp[i - 1][j] + dp[i][j - 1];
-            }
-        }
+  memoDP(m, n) {
+    const memo = new Map();
 
-        return dp[m-1][n-1];
-    }
+    const solve = (i, j) => {
+      // Invalid path
+      if (i >= m || j >= n) return 0;
 
-    memoDP(m, n) {
-        const memo = new Map();
+      // Valid path
+      if (i === m - 1 && j === n - 1) return 1;
 
-        const solve = (i, j) => {
-            // Invalid path
-            if (i >= m || j >= n) return 0;
+      // Check path
+      const key = `${i},${j}`;
+      if (memo.has(key)) return memo.get(key);
 
-            // Valid path
-            if (i === m - 1 && j === n - 1) return 1;
+      // Case-1: Right
+      let right = solve(i, j + 1);
 
-            // Check path
-            const key = `${i},${j}`;
-            if (memo.has(key)) return memo.get(key);
+      // Case-2: Down
+      let down = solve(i + 1, j);
 
-            // Case-1: Right
-            let right = solve(i, j + 1);
+      // Total ways
+      let ways = right + down;
 
-            // Case-2: Down
-            let down = solve(i + 1, j);
+      // Set ways
+      memo.set(key, ways);
 
-            // Total ways
-            let ways = right + down;
+      return ways;
+    };
 
-            // Set ways
-            memo.set(key, ways);
+    return solve(0, 0);
+  }
 
-            return ways;
-        };
+  brute(m, n) {
+    const solve = (i, j) => {
+      // Invalid path
+      if (i >= m || j >= n) return 0;
 
-        return solve(0, 0);
-    }
+      // Valid path
+      if (i === m - 1 && j === n - 1) return 1;
 
-    brute(m, n) {
-        const solve = (i, j) => {
-            // Invalid path
-            if (i >= m || j >= n) return 0;
+      // Case-1: Right
+      let right = solve(i, j + 1);
 
-            // Valid path
-            if (i === m - 1 && j === n - 1) return 1;
+      // Case-2: Down
+      let down = solve(i + 1, j);
 
-            // Case-1: Right
-            let right = solve(i, j + 1);
+      return right + down;
+    };
 
-            // Case-2: Down
-            let down = solve(i + 1, j);
-
-            return right + down;
-        };
-
-        return solve(0, 0);
-    }
+    return solve(0, 0);
+  }
 }

@@ -9,21 +9,21 @@
  */
 
 class Solution {
-    /**
-     * @param {ListNode} head
-     * @return {boolean}
-     */
-    hasCycle(head) {
-        let fast = head;
-        let slow = head;
+  /**
+   * @param {ListNode} head
+   * @return {boolean}
+   */
+  hasCycle(head) {
+    let fast = head;
+    let slow = head;
 
-        while(fast !== null && fast.next !== null){
-            fast = fast.next.next;
-            slow = slow.next;
+    while (fast !== null && fast.next !== null) {
+      fast = fast.next.next;
+      slow = slow.next;
 
-            if(fast === slow) return true;
-        }
-
-        return false;
+      if (fast === slow) return true;
     }
+
+    return false;
+  }
 }
